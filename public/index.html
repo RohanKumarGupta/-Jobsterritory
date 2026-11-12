@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f4">
+    <meta name="description" content="Discover thoughtful career opportunities with Jobs Territory.">
+    <title>Jobs Territory — Find work that feels right</title>
+    <link rel="stylesheet" href="/styles.css?v=2">
+    <script src="/app.js?v=2" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Jobs Territory home">
+        <span class="brand-mark" aria-hidden="true">jt</span>
+        <span>jobs<span class="brand-light">territory</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="jobs">Find a job</button>
+        <button class="nav-link" data-view="applications">My applications</button>
+      </nav>
+      <div class="header-actions" id="header-actions">
+        <button class="button button-quiet" data-open-auth="login">Log in</button>
+        <button class="button button-dark" data-open-auth="register">Create account <span aria-hidden="true">↗</span></button>
+      </div>
+    </header>
+
+    <main>
+      <section id="jobs-view">
+        <section class="hero">
+          <div class="hero-content">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> A better way to find your next move</div>
+            <h1>Good work.<br><span>Good people.</span></h1>
+            <p class="hero-copy">Find a role that fits your life, your ambition, and the way you want to work.</p>
+            <form class="search-panel" id="search-form">
+              <label class="search-field">
+                <span class="field-icon" aria-hidden="true">⌕</span>
+                <span class="sr-only">Job title, company, or skill</span>
+                <input id="search-query" type="search" placeholder="Job title, company, or skill">
+              </label>
+              <span class="search-divider" aria-hidden="true"></span>
+              <label class="search-field location-field">
+                <span class="field-icon pin-icon" aria-hidden="true">⌖</span>
+                <span class="sr-only">City or remote</span>
+                <input id="search-location" type="search" placeholder="City or remote">
+              </label>
+              <button class="button button-green search-button" type="submit">Search jobs <span aria-hidden="true">→</span></button>
+            </form>
+            <div class="popular-searches">Popular: <button data-search="Product">Product</button><button data-search="Engineer">Engineering</button><button data-search="Remote">Remote</button></div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div>
+            <div class="art-orbit orbit-two"></div>
+            <div class="art-sun"></div>
+            <div class="art-shape art-shape-large"></div>
+            <div class="art-shape art-shape-small"></div>
+            <div class="art-stem"></div>
+            <div class="art-leaf leaf-one"></div>
+            <div class="art-leaf leaf-two"></div>
+            <div class="art-leaf leaf-three"></div>
+            <div class="art-caption"><span>MAKE YOUR</span><strong>NEXT MOVE</strong><i>✳</i></div>
+          </div>
+        </section>
+
+        <section class="content-section" id="browse">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow eyebrow-muted">OPPORTUNITIES, WITH INTENTION</div>
+              <h2>Find your kind of work.</h2>
+            </div>
+            <p class="section-note"><strong id="job-count">0</strong> <span id="section-note-text">opportunities to explore</span></p>
+          </div>
+          <div class="browse-layout">
+            <aside class="filters" aria-label="Filter jobs">
+              <div class="filter-heading"><h3>Filters</h3><button class="text-button" id="clear-filters">Clear all</button></div>
+              <label class="filter-label" for="filter-type">Job type</label>
+              <select id="filter-type">
+                <option value="">All job types</option><option>Full-time</option><option>Contract</option><option>Internship</option>
+              </select>
+              <label class="filter-label" for="filter-mode">Work arrangement</label>
+              <select id="filter-mode">
+                <option value="">Any arrangement</option><option>Remote</option><option>Hybrid</option><option>On-site</option>
+              </select>
+              <label class="filter-label" for="filter-experience">Experience level</label>
+              <select id="filter-experience">
+                <option value="">All experience levels</option><option>Entry-level</option><option>Mid-level</option><option>Senior</option><option>Internship</option>
+              </select>
+              <div class="filter-tip"><span>✦</span><strong>A little tip</strong><p>Keep your profile up to date to make a great first impression when you apply.</p><button class="text-button" data-view="profile">Complete your profile →</button></div>
+            </aside>
+            <div class="job-results">
+              <div class="results-toolbar">
+                <span id="results-label">All opportunities</span>
+                <label class="sort-control">Sort by <select id="sort-jobs"><option value="recent">Most recent</option><option value="company">Company name</option></select></label>
+              </div>
+              <div class="job-grid" id="job-grid" aria-live="polite"></div>
+              <div class="connection-state hidden" id="jobs-error" role="alert">
+                <div><strong>We couldn't load jobs.</strong><p id="jobs-error-message">Check your connection and try again.</p></div>
+                <button class="button button-dark" id="retry-jobs" type="button">Try again</button>
+              </div>
+              <div class="empty-state hidden" id="jobs-empty"><span class="empty-icon">⌕</span><h3>No roles found</h3><p>Try adjusting your search or clearing a filter to see more opportunities.</p><button class="button button-dark" id="empty-clear">Clear filters</button></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="content-section dashboard-section hidden" id="applications-view">
+        <div class="section-heading">
+          <div><div class="eyebrow eyebrow-muted">YOUR CAREER, IN ONE PLACE</div><h2>My applications.</h2><p class="dashboard-intro">Keep track of the opportunities you've put your name forward for.</p></div>
+          <button class="button button-green" data-view="jobs">Explore jobs <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="application-summary" id="application-summary"></div>
+        <div class="application-list" id="application-list" aria-live="polite"></div>
+        <div class="empty-state hidden" id="applications-empty"><span class="empty-icon">↗</span><h3>Your next chapter starts here.</h3><p>You haven't applied to any roles yet. Explore open positions and find a good fit.</p><button class="button button-green" data-view="jobs">Browse open roles</button></div>
+      </section>
+
+      <section class="content-section dashboard-section hidden" id="profile-view">
+        <div class="section-heading">
+          <div><div class="eyebrow eyebrow-muted">MAKE A GREAT FIRST IMPRESSION</div><h2>Your profile.</h2><p class="dashboard-intro">Tell employers a little about who you are and what you bring.</p></div>
+        </div>
+        <form class="profile-form" id="profile-form">
+          <div class="profile-form-grid">
+            <label>Full name<input name="name" required maxlength="80"></label>
+            <label>Email address<input name="email" type="email" disabled></label>
+            <label>Phone<input name="phone" type="tel" maxlength="30" placeholder="+91 98765 43210"></label>
+            <label>Location<input name="location" maxlength="100" placeholder="City, country"></label>
+            <label class="full-span">Professional headline<input name="headline" maxlength="120" placeholder="e.g. Product designer who loves solving complex problems"></label>
+            <label class="full-span">About you<textarea name="bio" rows="5" maxlength="1000" placeholder="Share a little about your experience, interests, and what you're looking for."></textarea></label>
+            <label class="full-span">Skills <span class="label-hint">Separate each skill with a comma</span><input name="skills" maxlength="500" placeholder="Research, Figma, Product strategy"></label>
+            <label>LinkedIn profile<input name="linkedin" type="url" maxlength="300" placeholder="https://linkedin.com/in/you"></label>
+            <label>Resume link<input name="resumeUrl" type="url" maxlength="300" placeholder="https://..."></label>
+          </div>
+          <div class="profile-actions"><span id="profile-message" role="status"></span><button class="button button-green" type="submit">Save profile <span aria-hidden="true">→</span></button></div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true">jt</span><span>jobs<span class="brand-light">territory</span></span></a><span>Good work starts with a good fit.</span><span>© 2026 Jobs Territory</span></footer>
+
+    <div class="modal-backdrop hidden" id="auth-modal" role="presentation">
+      <section class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <button class="modal-close" id="close-auth" aria-label="Close dialog">×</button>
+        <div class="modal-mark">jt</div><div class="eyebrow eyebrow-muted">YOUR NEXT CHAPTER</div>
+        <h2 id="auth-title">Welcome back.</h2><p class="modal-copy" id="auth-copy">Sign in to pick up where you left off.</p>
+        <div class="auth-tabs"><button class="auth-tab active" data-auth-mode="login">Log in</button><button class="auth-tab" data-auth-mode="register">Create account</button></div>
+        <form id="auth-form">
+          <label class="auth-name hidden">Full name<input name="name" autocomplete="name" maxlength="80"></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" required></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" required></label>
+          <div class="auth-error" id="auth-error" role="alert"></div>
+          <button class="button button-green auth-submit" type="submit">Log in <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="demo-hint">Just looking around? Try <strong>demo@jobterritory.com</strong><br>with password <strong>Candidate123!</strong></div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop hidden" id="apply-modal" role="presentation">
+      <section class="apply-modal" role="dialog" aria-modal="true" aria-labelledby="apply-title">
+        <button class="modal-close" id="close-apply" aria-label="Close dialog">×</button>
+        <div class="eyebrow eyebrow-muted">TAKE THE NEXT STEP</div><h2 id="apply-title">Apply for this role.</h2><div id="apply-job-summary"></div>
+        <form id="apply-form"><label>Note to the hiring team <span class="label-hint">Optional · up to 2,000 characters</span><textarea name="coverLetter" rows="5" maxlength="2000" placeholder="What makes this opportunity interesting to you?"></textarea></label>
+          <div class="auth-error" id="apply-error" role="alert"></div>
+          <button class="button button-green auth-submit" type="submit">Submit application <span aria-hidden="true">→</span></button>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop hidden" id="job-detail-modal" role="presentation">
+      <section class="job-detail-modal" role="dialog" aria-modal="true" aria-labelledby="job-detail-title">
+        <button class="modal-close" id="close-job-detail" aria-label="Close job details">×</button>
+        <div class="job-detail-company" id="job-detail-company"></div>
+        <h2 id="job-detail-title"></h2>
+        <p class="job-detail-meta" id="job-detail-meta"></p>
+        <p class="job-detail-salary" id="job-detail-salary"></p>
+        <h3>About the role</h3>
+        <p class="job-detail-description" id="job-detail-description"></p>
+        <h3>Skills for this role</h3>
+        <div class="job-detail-skills" id="job-detail-skills"></div>
+        <div class="job-detail-actions">
+          <span class="posted-label" id="job-detail-posted"></span>
+          <button class="button button-green" id="job-detail-apply" type="button">Apply for this role <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast hidden" id="toast" role="status"></div>
+  </body>
+</html>
